@@ -5,6 +5,7 @@ import { Route, NavLink} from "react-router-dom";
 import './App.css';
 import SmurfForm from './components/SmurfForm';
 import Smurfs from './components/Smurfs';
+import Smurf from "./components/Smurf";
 
 class App extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    console.log("component is mounting")
     axios
       .get("http://localhost:3333/smurfs")
       .then(response => {
@@ -33,8 +35,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <NavLink exact to="/">Smurf List</NavLink>
-        <NavLink to="/smurf-form">Smurf Form</NavLink>
+        <div className="nav-bar">
+          <span><NavLink exact to="/">Smurf List</NavLink></span>
+          <span><NavLink to="/smurf-form">Smurf Form</NavLink></span>
+        </div>
         <Route
           exact path="/"
           render={props =>
@@ -49,6 +53,17 @@ class App extends Component {
             <SmurfForm
               {...props}
             />}
+        />
+        <Route
+          path="/smurfs/:id"
+          render= {props =>
+            <Smurf
+              {...props}
+              // name={"hello"}
+              // age={this.state.age}
+              // height={this.state.height}
+            />
+          }
         />
       </div>
     );

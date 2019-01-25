@@ -10,7 +10,7 @@ class SmurfForm extends Component {
       height: ''
     };
   }
-
+  
   addSmurf = event => {
     console.log("adding smurf")
     event.preventDefault();
@@ -19,7 +19,6 @@ class SmurfForm extends Component {
       age: this.state.age,
       height: this.state.height
     }
-    // add code to create the smurf using the api
     axios
     .post("http://localhost:3333/smurfs", newSmurf)
     .then(response => this.setState({
@@ -29,6 +28,7 @@ class SmurfForm extends Component {
       height: ''
     }))
     .catch(err => console.log(err))
+    this.props.history.push("./")
   }
 
   handleInputChange = e => {
